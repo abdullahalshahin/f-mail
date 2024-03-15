@@ -7,6 +7,10 @@ const Response = async (req = null, data) => {
         ? new Date(data.created_at).toLocaleString()
         : "";
 
+    const updated_at = data.updated_at
+        ? new Date(data.updated_at).toLocaleString()
+        : "";
+
     const attachments_array = (data.sent_mail_id) ? (data.sent_mail_id.attachments || null) : null;
     const attachments = attachments_array.map(filename => {
         return `${base_url}/attachment_files/${filename}`;
@@ -23,8 +27,8 @@ const Response = async (req = null, data) => {
         is_starred: (data.is_starred) ? true : false,
         is_important: (data.is_important) ? true : false,
         label: data.label || null,
-        created_at: data.created_at || null,
-        updated_at: data.updated_at || null,
+        created_at: created_at,
+        updated_at: updated_at,
         sender_info: (sender) ? UserResource.Response(req, sender) : null,
     };
 }

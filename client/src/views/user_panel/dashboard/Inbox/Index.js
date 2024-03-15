@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Helpers from './../../../../utils/Helpers';
+import Topbar from './../../components/Topbar';
 
 export class Index extends Component {
     constructor(props) {
@@ -11,8 +12,8 @@ export class Index extends Component {
     }
 
     componentDidMount() {
-        let title = `Index | ${Helpers.appInfo().app_name}`;
-        let meta_description = "Index Description";
+        let title = `Dashboard | ${Helpers.appInfo().app_name}`;
+        let meta_description = "Dashboard Description";
 
         Helpers.updateHeadComponentDidMount(title, meta_description);
     }
@@ -23,8 +24,10 @@ export class Index extends Component {
 
     render() {
         return (
-            <div className='Index'>
-                Index Page
+            <div className='dashboard'>
+                <div className="wrapper">
+                    <Topbar />
+                </div>
             </div>
         );
     };

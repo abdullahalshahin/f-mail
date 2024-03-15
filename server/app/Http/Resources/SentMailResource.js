@@ -7,6 +7,10 @@ const Response = async (req = null, data) => {
         ? new Date(data.created_at).toLocaleString()
         : null;
 
+    const updated_at = data.updated_at
+        ? new Date(data.updated_at).toLocaleString()
+        : null;
+
     const attachments_array = data.attachments || null;
     const attachments = attachments_array.map(filename => {
         return `${base_url}/attachment_files/${filename}`;
@@ -20,8 +24,8 @@ const Response = async (req = null, data) => {
         is_starred: (data.is_starred) ? true : false,
         is_important: (data.is_important) ? true : false,
         label: data.label || null,
-        created_at: data.created_at || null,
-        updated_at: data.updated_at || null,
+        created_at: created_at,
+        updated_at: updated_at,
         sent_users: (data.received_mails) ? (await Promise.all(data.received_mails.map(async (received_mail) => {
             return {
                 _id: received_mail.recipient_id._id,

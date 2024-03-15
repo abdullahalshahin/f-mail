@@ -20,9 +20,9 @@ Route.post('/user-panel/dashboard/sent-mails/sent', authenticatedUserMiddleware,
 Route.get('/user-panel/dashboard/received-mails/index', authenticatedUserMiddleware, ReceivedMailController.index);
 Route.get('/user-panel/dashboard/received-mails/:mail_id/show', authenticatedUserMiddleware, ReceivedMailController.show);
 
-// Route.get('/user-panel/dashboard/mails/starred', authenticatedUserMiddleware, MailController.starred);
-// Route.get('/user-panel/dashboard/mails/important', authenticatedUserMiddleware, MailController.important);
-// Route.get('/user-panel/dashboard/mails/trash', authenticatedUserMiddleware, MailController.trash);
+Route.get('/user-panel/dashboard/mails/starred', authenticatedUserMiddleware, MailController.starred);
+Route.get('/user-panel/dashboard/mails/important', authenticatedUserMiddleware, MailController.important);
+Route.get('/user-panel/dashboard/mails/trash', authenticatedUserMiddleware, MailController.trash);
 
 Route.post('/user-panel/dashboard/sent-mails/:mail_id/mark-as-starred', authenticatedUserMiddleware, SentMailController.mark_as_starred);
 Route.post('/user-panel/dashboard/sent-mails/:mail_id/unmark-as-starred', authenticatedUserMiddleware, SentMailController.unmark_as_starred);
@@ -31,19 +31,19 @@ Route.post('/user-panel/dashboard/received-mails/:mail_id/unmark-as-starred', au
 
 Route.post('/user-panel/dashboard/sent-mails/:mail_id/mark-as-important', authenticatedUserMiddleware, SentMailController.mark_as_important);
 Route.post('/user-panel/dashboard/sent-mails/:mail_id/unmark-as-important', authenticatedUserMiddleware, SentMailController.unmark_as_important);
-// Route.post('/user-panel/dashboard/received-mails/:mail_id/mark-as-important', authenticatedUserMiddleware, ReceivedMailController.mark_as_important);
-// Route.post('/user-panel/dashboard/received-mails/:mail_id/unmark-as-important', authenticatedUserMiddleware, ReceivedMailController.unmark_as_important);
+Route.post('/user-panel/dashboard/received-mails/:mail_id/mark-as-important', authenticatedUserMiddleware, ReceivedMailController.mark_as_important);
+Route.post('/user-panel/dashboard/received-mails/:mail_id/unmark-as-important', authenticatedUserMiddleware, ReceivedMailController.unmark_as_important);
 
-// Route.get('/user-panel/dashboard/received-mails/spam', authenticatedUserMiddleware, ReceivedMailController.spam);
-// Route.post('/user-panel/dashboard/received-mails/:mail_id/move-to-spam', authenticatedUserMiddleware, ReceivedMailController.move_to_spam);
-// Route.post('/user-panel/dashboard/received-mails/:mail_id/move-to-received-mails', authenticatedUserMiddleware, ReceivedMailController.move_to_received_mails);
+Route.get('/user-panel/dashboard/received-mails/spam', authenticatedUserMiddleware, ReceivedMailController.spam);
+Route.post('/user-panel/dashboard/received-mails/:mail_id/move-to-spam', authenticatedUserMiddleware, ReceivedMailController.move_to_spam);
+Route.post('/user-panel/dashboard/received-mails/:mail_id/move-to-received-mails-from-spam', authenticatedUserMiddleware, ReceivedMailController.move_to_received_mails_from_spam);
 
 Route.post('/user-panel/dashboard/sent-mails/:mail_id/move-to-trash', authenticatedUserMiddleware, SentMailController.move_to_trash);
 Route.post('/user-panel/dashboard/sent-mails/:mail_id/move-to-sent-mail-from-trash', authenticatedUserMiddleware, SentMailController.move_to_sent_mails);
 Route.post('/user-panel/dashboard/sent-mails/:mail_id/permanently-delete-from-trash', authenticatedUserMiddleware, SentMailController.permanently_delete_from_trash);
-// Route.post('/user-panel/dashboard/received-mails/:mail_id/move-to-trash', authenticatedUserMiddleware, ReceivedMailController.move_to_trash);
-// Route.post('/user-panel/dashboard/received-mails/:mail_id/move-to-received-mail-from-trash', authenticatedUserMiddleware, ReceivedMailController.move_to_sent_mails);
-// Route.post('/user-panel/dashboard/received-mails/:mail_id/permanently-delete-from-trash', authenticatedUserMiddleware, ReceivedMailController.permanently_delete_from_trash);
+Route.post('/user-panel/dashboard/received-mails/:mail_id/move-to-trash', authenticatedUserMiddleware, ReceivedMailController.move_to_trash);
+Route.post('/user-panel/dashboard/received-mails/:mail_id/move-to-received-mail-from-trash', authenticatedUserMiddleware, ReceivedMailController.move_to_sent_mails_from_trash);
+Route.post('/user-panel/dashboard/received-mails/:mail_id/permanently-delete-from-trash', authenticatedUserMiddleware, ReceivedMailController.permanently_delete_from_trash);
 
 Route.get('/user-panel/dashboard/my-account', authenticatedUserMiddleware, MyAccountController.index);
 Route.post('/user-panel/dashboard/my-account-update', authenticatedUserMiddleware, MyAccountController.update);

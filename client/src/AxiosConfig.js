@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://127.0.0.1:8000';
+const BASE_URL = 'http://192.168.182.87:4040';
 
 const AxiosConfig = axios.create({
     baseURL: BASE_URL,
@@ -10,10 +10,10 @@ const AxiosConfig = axios.create({
 });
 
 AxiosConfig.interceptors.request.use((config) => {
-    const auth_customer_token = localStorage.getItem('auth_customer_token');
+    const auth_user_token = localStorage.getItem('AUTH_USER_TOKEN');
 
-    if (auth_customer_token) {
-        config.headers.Authorization = `Bearer ${auth_customer_token}`;
+    if (auth_user_token) {
+        config.headers.Authorization = `Bearer ${auth_user_token}`;
     }
     
     return config;
