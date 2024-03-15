@@ -10,6 +10,7 @@ import DraftIndex from './views/user_panel/dashboard/Draft/Index';
 import ImportantIndex from './views/user_panel/dashboard/important/Index';
 import MyAccountIndex from './views/user_panel/dashboard/my_account/Index';
 import InboxIndex from './views/user_panel/dashboard/Inbox/Index';
+import InboxShow from './views/user_panel/dashboard/Inbox/Show';
 import SentMailIndex from './views/user_panel/dashboard/sent_mail/Index';
 import SpamIndex from './views/user_panel/dashboard/spam/Index';
 import StarredIndex from './views/user_panel/dashboard/starred/Index';
@@ -43,6 +44,7 @@ class AppRoutes extends Component {
                         (
                             <>
                                 <Route path="/user-panel/dashboard" element={<InboxIndex />} />
+                                <Route path="/user-panel/dashboard/received-mails/:mail_id/show" element={<InboxShow />} />
                                 <Route path="/user-panel/dashboard/draft" element={<DraftIndex />} />
                                 <Route path="/user-panel/dashboard/important" element={<ImportantIndex />} />
                                 <Route path="/user-panel/dashboard/my-account" element={<MyAccountIndex />} />

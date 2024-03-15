@@ -1,32 +1,45 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import Helpers from './../../../../utils/Helpers';
 import AxiosAPI from './../../../../AxiosConfig';
-import Topbar from './../../components/Topbar';
-import LeftSidebar from './../../components/LeftSidebar';
-import Footer from './../../components/Footer';
+import Topbar from '../../components/Topbar';
+import LeftSidebar from '../../components/LeftSidebar';
 import { Link } from 'react-router-dom';
 
-export class Index extends Component {
+export class Show extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            received_mails: [],
-            pagination: {}
+            received_mail: {
+                id: "",
+                subject: "",
+                body: "",
+                attachments: [],
+                read_at: "",
+                is_starred: "",
+                is_important: "",
+                label: "",
+                created_at: "",
+                updated_at: "",
+                sender_info: {}
+            }
         };
     }
 
     componentDidMount() {
-        let title = `Dashboard | ${Helpers.appInfo().app_name}`;
-        let meta_description = "Dashboard Description";
+        let title = `Show Mail | ${Helpers.appInfo().app_name}`;
+        let meta_description = "Show Mail Description";
 
         Helpers.updateHeadComponentDidMount(title, meta_description);
 
-        AxiosAPI.get(`/api/user-panel/dashboard/received-mails/index`)
+        const pathname = window.location.pathname;
+        const pathParts = pathname.split('/');
+        const received_mail_id = pathParts[pathParts.length - 2];
+
+        AxiosAPI.get(`/api/user-panel/dashboard/received-mails/${received_mail_id}/show`)
             .then(response => {
                 this.setState({
-                    received_mails: response.data.result.mails,
-                    pagination: response.data.result.pagination,
+                    received_mail: response.data.result.mail
                 });
             })
             .catch(error => {
@@ -36,12 +49,8 @@ export class Index extends Component {
             });
     }
 
-    componentWillUnmount() {
-        Helpers.updateHeadComponentWillUnmount();
-    }
-
     render() {
-        const { received_mails, pagination } = this.state;
+        const { received_mail } = this.state;
 
         return (
             <div className="wrapper">
@@ -59,11 +68,11 @@ export class Index extends Component {
                                             <ol className="breadcrumb m-0">
                                                 <li className="breadcrumb-item"><Link to={'/'}>F-Mail</Link></li>
                                                 <li className="breadcrumb-item"><Link to={'/user-panel/dashboard'}>Inbox</Link></li>
-                                                <li className="breadcrumb-item active">Inbox</li>
+                                                <li className="breadcrumb-item active">Email Read</li>
                                             </ol>
                                         </div>
 
-                                        <h4 className="page-title">Inbox</h4>
+                                        <h4 className="page-title">Email Read</h4>
                                     </div>
                                 </div>
                             </div>
@@ -71,7 +80,7 @@ export class Index extends Component {
                             <div className="row">
                                 <div className="col-12">
                                     <div className="card">
-                                        <div className="card-body">
+                                    <div className="card-body">
                                             <div className="">
                                                 <div className="btn-group">
                                                     <button type="button" className="btn btn-secondary"><i className="mdi mdi-archive font-16"></i></button>
@@ -125,71 +134,65 @@ export class Index extends Component {
                                                 </div>
 
                                                 <div className="mt-3">
-                                                    <ul className="email-list">
-                                                        {received_mails.map(mail => (
-                                                            <li key={mail.id} className={mail.read_at ? '' : 'unread'}>
-                                                                <div className="email-sender-info">
-                                                                    <div className="checkbox-wrapper-mail">
-                                                                        <div className="form-check">
-                                                                            <input type="checkbox" className="form-check-input" id="mail20" />
-                                                                            <label className="form-check-label" htmlFor="mail20"></label>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    {(mail.is_starred) ? 
-                                                                        (
-                                                                            <span className="star-toggle mdi mdi-star-outline text-warning"></span>
-                                                                        ) : (
-                                                                            <span className="star-toggle mdi mdi-star-outline"></span>
-                                                                        )
-                                                                    }
-                                                                    
-                                                                    <Link to={`/user-panel/dashboard/received-mails/${mail.id}/show`} className="email-title">{mail.sender_info.name}</Link>
-                                                                </div>
-
-                                                                <div className="email-content">
-                                                                    <Link to={`/user-panel/dashboard/received-mails/${mail.id}/show`} className="email-subject">{mail.subject} &nbsp;&ndash;&nbsp;
-                                                                        <span>{mail.body}</span>
-                                                                    </Link>
-
-                                                                    <div className="email-date">{new Date(mail.updated_at).toLocaleDateString()}</div>
-                                                                </div>
-
-                                                                <div className="email-action-icons">
-                                                                    <ul className="list-inline">
-                                                                        <li className="list-inline-item">
-                                                                            <Link to={'/'}><i className="mdi mdi-archive email-action-icons-item"></i></Link>
-                                                                        </li>
-                                                                        <li className="list-inline-item">
-                                                                            <Link to={'/'}><i className="mdi mdi-delete email-action-icons-item"></i></Link>
-                                                                        </li>
-                                                                        <li className="list-inline-item">
-                                                                            <Link to={'/'}><i className="mdi mdi-email-mark-as-unread email-action-icons-item"></i></Link>
-                                                                        </li>
-                                                                        <li className="list-inline-item">
-                                                                            <Link to={'/'}><i className="mdi mdi-clock email-action-icons-item"></i></Link>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </li>
-                                                        ))}
-                                                    </ul>
-                                                </div>
-
-                                                {pagination && (
-                                                    <div className="row">
-                                                        <div className="col-7 mt-1">
-                                                            Showing {pagination.from || "N/A"} - {pagination.to || "N/A"} of {pagination.total_items || "N/A"}
+                                                    <h5 className="font-18">{received_mail.subject}</h5>
+                                                    <hr/>
+                                                    <div className="d-flex mb-3 mt-1">
+                                                        <img className="d-flex me-2 rounded-circle" src={received_mail.sender_info.profile_image} alt="placeholder image" height="32" />
+                                                        <div className="w-100 overflow-hidden">
+                                                            <small className="float-end">{received_mail.updated_at}</small>
+                                                            <h6 className="m-0 font-14">{received_mail.sender_info.name}</h6>
+                                                            <small className="text-muted">From: {received_mail.sender_info.username}</small>
                                                         </div>
+                                                    </div>
 
-                                                        <div className="col-5">
-                                                            <div className="btn-group float-end">
-                                                                <button type="button" className="btn btn-light btn-sm"><i className="mdi mdi-chevron-left"></i></button>
-                                                                <button type="button" className="btn btn-info btn-sm"><i className="mdi mdi-chevron-right"></i></button>
+                                                    <div>
+                                                        {received_mail.body}
+                                                    </div>
+
+                                                    <hr/>
+
+                                                    {(received_mail.attachments && received_mail.attachments.length > 0) ?
+                                                        (
+                                                            <div>
+                                                                <h5 className="mb-3">Attachments</h5>
+
+                                                                <div className='row'>
+                                                                    {received_mail.attachments.map((attachment, index) => (
+                                                                        <div className="col-xl-4" key={index}>
+                                                                            <div className="card mb-1 shadow-none border">
+                                                                                <div className="p-2">
+                                                                                    <div className="row align-items-center">
+                                                                                        <div className="col-auto">
+                                                                                            <div className="avatar-sm">
+                                                                                                <span className="avatar-title bg-primary-lighten text-primary rounded">
+                                                                                                    .FILE
+                                                                                                </span>
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                        <div className="col ps-0">
+                                                                                            <Link to={`${attachment}`} className="text-muted fw-bold">attachment {++index}</Link>
+                                                                                            <p className="mb-0">2.3 MB</p>
+                                                                                        </div>
+
+                                                                                        <div className="col-auto">
+                                                                                            <Link to={`${attachment}`} className="btn btn-link btn-lg text-muted">
+                                                                                                <i className="ri-download-2-line"></i>
+                                                                                            </Link>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    ))}
+                                                                </div>
                                                             </div>
-                                                        </div> 
-                                                    </div> 
-                                                )}
+                                                        ) :
+                                                        (
+                                                            ""
+                                                        )
+                                                    }
+                                                </div>
                                             </div> 
                                         </div>
 
@@ -199,12 +202,10 @@ export class Index extends Component {
                             </div>
                         </div>
                     </div>
-
-                    <Footer />
                 </div>
             </div>
         );
     };
 };
 
-export default Index;
+export default Show;
