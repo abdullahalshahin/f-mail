@@ -15,6 +15,7 @@ Route.get('/user-panel/dashboard/sent-mails/draft', authenticatedUserMiddleware,
 Route.get('/user-panel/dashboard/sent-mails/:mail_id/draft-to-mail', authenticatedUserMiddleware, SentMailController.draft_to_mail);
 Route.get('/user-panel/dashboard/sent-mails/:mail_id/show', authenticatedUserMiddleware, SentMailController.show);
 Route.get('/user-panel/dashboard/sent-mails/create', authenticatedUserMiddleware, SentMailController.create);
+Route.get('/user-panel/dashboard/search-users', authenticatedUserMiddleware, SentMailController.search_users);
 Route.post('/user-panel/dashboard/sent-mails/sent', authenticatedUserMiddleware, SentMailController.sent);
 
 Route.get('/user-panel/dashboard/received-mails/index', authenticatedUserMiddleware, ReceivedMailController.index);

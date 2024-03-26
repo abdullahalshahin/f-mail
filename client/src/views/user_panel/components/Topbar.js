@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import AxiosAPI from './../../../AxiosConfig';
 import AvatorPng from './../../../assets/images/avator.png';
 import LogoDarkSmPng from './../../../assets/images/logo-dark-sm.png';
 import LogoDarkPng from './../../../assets/images/logo-dark.png';
@@ -11,8 +12,29 @@ export class Topbar extends Component {
         super(props);
 
         this.state = {
-            data: null
+            data: null,
+            name: "",
+            username: "",
+            profile_image: AvatorPng
         };
+    }
+
+    componentDidMount() {
+        AxiosAPI.get(`/api/user-panel/dashboard/my-account`)
+            .then(response => {
+                const userData = response.data.result.user;
+
+                this.setState({
+                    name: userData.name,
+                    username: userData.username,
+                    profile_image: userData.profile_image
+                });
+            })
+            .catch(error => {
+                this.setState({
+                    error: error,
+                });
+            });
     }
 
     handleLogout = () => {
@@ -22,6 +44,8 @@ export class Topbar extends Component {
     };
 
     render() {
+        const { name, username, profile_image } = this.state;
+
         return (
             <div className='navbar-custom'>
                 <div className="topbar container-fluid">
@@ -71,34 +95,15 @@ export class Topbar extends Component {
                             </div>
                         </li>
 
-                        <li className="d-none d-sm-inline-block">
-                            <Link className="nav-link" data-bs-toggle="offcanvas" to={"#theme-settings-offcanvas"}>
-                                <i className="ri-settings-3-line font-22"></i>
-                            </Link>
-                        </li>
-
-                        <li className="d-none d-sm-inline-block">
-                            <div className="nav-link" id="light-dark-mode" data-bs-toggle="tooltip" data-bs-placement="left" title="Theme Mode">
-                                <i className="ri-moon-line font-22"></i>
-                            </div>
-                        </li>
-
-
-                        <li className="d-none d-md-inline-block">
-                            <Link className="nav-link" to={""} data-toggle="fullscreen">
-                                <i className="ri-fullscreen-line font-22"></i>
-                            </Link>
-                        </li>
-
                         <li className="dropdown">
                             <Link className="nav-link dropdown-toggle arrow-none nav-user px-2" data-bs-toggle="dropdown" to={"#"} role="button" aria-haspopup="false" aria-expanded="false">
                                 <span className="account-user-avatar">
-                                    <img src={AvatorPng} alt="" width="32" className="rounded-circle" />
+                                    <img src={profile_image} alt="" width="32" className="rounded-circle" />
                                 </span>
 
                                 <span className="d-lg-flex flex-column gap-1 d-none">
-                                    <h5 className="my-0">Dominic Keller</h5>
-                                    <h6 className="my-0 fw-normal">Founder</h6>
+                                    <h5 className="my-0">{name}</h5>
+                                    <h6 className="my-0 fw-normal">{username}</h6>
                                 </span>
                             </Link>
                             

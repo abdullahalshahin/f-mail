@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import AvatorPng from './../../../assets/images/avator.png';
 import LogoDarkSmPng from './../../../assets/images/logo-dark-sm.png';
 import LogoDarkPng from './../../../assets/images/logo-dark.png';
 import LogoSmPng from './../../../assets/images/logo-sm.png';
@@ -18,7 +17,7 @@ export class LeftSidebar extends Component {
     render() {
         return (
             <div className='leftside-menu'>
-                <Link to={'/'} className="logo logo-light">
+                <Link to={'/user-panel/dashboard'} className="logo logo-light">
                     <span className="logo-lg">
                         <img src={LogoPng} alt="logo" />
                     </span>
@@ -27,7 +26,7 @@ export class LeftSidebar extends Component {
                     </span>
                 </Link>
 
-                <Link to={'/'} className="logo logo-dark">
+                <Link to={'/user-panel/dashboard'} className="logo logo-dark">
                     <span className="logo-lg">
                         <img src={LogoDarkPng} alt="dark logo" />
                     </span>
@@ -45,19 +44,12 @@ export class LeftSidebar extends Component {
                 </div>
 
                 <div className="h-100" id="leftside-menu-container" data-simplebar>
-                    <div className="leftbar-user">
-                        <Link to={'/user-panel/dashboard/my-account'}>
-                            <img src={AvatorPng} alt="" height="42" className="rounded-circle shadow-sm" />
-                            <span className="leftbar-user-name mt-2">Dominic Keller</span>
-                        </Link>
-                    </div>
-
                     <ul className="side-nav">
                         <li className="side-nav-title">Navigation</li>
 
-                        <div className="help-box text-white text-center" style={{ backgroundColor: '#fa5c7c', margin: '10px 25px', padding: '5px' }}>
+                        <Link to={'/user-panel/dashboard/sent-mail-create'} className="help-box btn text-white text-center" style={{ backgroundColor: '#fa5c7c', margin: '10px 25px', padding: '5px' }}>
                             <h5 >Compose</h5>
-                        </div>
+                        </Link>
 
                         <li className="side-nav-item">
                             <Link to={'/user-panel/dashboard'} className="side-nav-link">

@@ -79,37 +79,7 @@ export class Index extends Component {
                                                     <button type="button" className="btn btn-secondary"><i className="mdi mdi-delete-variant font-16"></i></button>
                                                 </div>
 
-                                                <div className="btn-group">
-                                                    <button type="button" className="btn btn-secondary dropdown-toggle arrow-none" data-bs-toggle="dropdown" aria-expanded="false">
-                                                        <i className="mdi mdi-folder font-16"></i>
-                                                        <i className="mdi mdi-chevron-down"></i>
-                                                    </button>
-
-                                                    <div className="dropdown-menu">
-                                                        <span className="dropdown-header">Move to:</span>
-                                                        <Link className="dropdown-item" to={'/'}>Social</Link>
-                                                        <Link className="dropdown-item" to={'/'}>Promotions</Link>
-                                                        <Link className="dropdown-item" to={'/'}>Updates</Link>
-                                                        <Link className="dropdown-item" to={'/'}>Forums</Link>
-                                                    </div>
-                                                </div>
-
-                                                <div className="btn-group">
-                                                    <button type="button" className="btn btn-secondary dropdown-toggle arrow-none" data-bs-toggle="dropdown" aria-expanded="false">
-                                                        <i className="mdi mdi-label font-16"></i>
-                                                        <i className="mdi mdi-chevron-down"></i>
-                                                    </button>
-
-                                                    <div className="dropdown-menu">
-                                                        <span className="dropdown-header">Label as:</span>
-                                                        <Link className="dropdown-item" to={'/'}>Updates</Link>
-                                                        <Link className="dropdown-item" to={'/'}>Social</Link>
-                                                        <Link className="dropdown-item" to={'/'}>Promotions</Link>
-                                                        <Link className="dropdown-item" to={'/'}>Forums</Link>
-                                                    </div>
-                                                </div>
-
-                                                <div className="btn-group">
+                                                <div className="btn-group mx-1">
                                                     <button type="button" className="btn btn-secondary dropdown-toggle arrow-none" data-bs-toggle="dropdown" aria-expanded="false">
                                                         <i className="mdi mdi-dots-horizontal font-16"></i> More
                                                         <i className="mdi mdi-chevron-down"></i>

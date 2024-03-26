@@ -3,6 +3,7 @@ const UserModel = require('./../../../Models/User');
 const SentMailModel = require('./../../../Models/SentMail');
 const ReceivedMailModel = require('./../../../Models/ReceivedMail');
 const SentMailResource = require('./../../Resources/SentMailResource');
+const UserResource = require('./../../Resources/UserResource');
 
 const index = async (req, res) => {
     try {
@@ -184,6 +185,16 @@ const show = async (req, res) => {
 
 const create = async (req, res) => {
     try {
+        const user_query = await UserModel.find();
+
+        const users = await Promise.all(user_query.map(async (user) => {
+            return {
+                id: user._id || null,
+                name: user.name || null,
+                username: user.username || null,
+            }
+        }));
+
         const dynamic_variables = [
             "{full_name}", "{date_of_birth}", "{phone_number}", "{mail}"
         ];
@@ -192,7 +203,40 @@ const create = async (req, res) => {
             success: true,
             message: 'Show successfully!!!',
             result: {
-                dynamic_variables
+                users,
+                dynamic_variables,
+            }
+        });
+    }
+    catch (error) {
+        res.status(400).json(error.message);
+    }
+}
+
+const search_users = async (req, res) => {
+    try {
+        const search_value = req.query.search || null;
+
+        const user_query = await UserModel.find({
+            $or: [
+                { name: { $regex: new RegExp(search_value, "i") } },
+                { username: { $regex: new RegExp(search_value, "i") } }
+            ]
+        });
+
+        const users = await Promise.all(user_query.map(async (user) => {
+            return {
+                id: user._id || null,
+                name: user.name || null,
+                username: user.username || null,
+            }
+        }));
+
+        return res.status(200).json({
+            success: true,
+            message: 'Show successfully!!!',
+            result: {
+                users
             }
         });
     }
@@ -401,6 +445,7 @@ module.exports = {
     draft_to_mail,
     show,
     create,
+    search_users,
     sent,
     mark_as_starred,
     unmark_as_starred,

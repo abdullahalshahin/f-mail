@@ -7,7 +7,7 @@ const index = async (req, res) => {
         const per_page = parseInt(req.query.per_page) || 10;
         const page = parseInt(req.query.page) || 1;
         const order_column = req.query.order_column || "updated_at";
-        const order_type = req.query.order_type || "asc";
+        const order_type = req.query.order_type || "desc";
 
         const searchQuery = search_value ? { subject: { $regex: search_value, $options: 'i' } } : {};
         const totalCount = await ReceivedMailModel.countDocuments({ ...searchQuery, is_draft: false, recipient_id: req.AuthUser._id, is_spam: false, is_trash: false, deleted_at: null });
