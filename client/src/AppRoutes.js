@@ -13,6 +13,7 @@ import InboxIndex from './views/user_panel/dashboard/Inbox/Index';
 import InboxShow from './views/user_panel/dashboard/Inbox/Show';
 import SentMailCreate from './views/user_panel/dashboard/sent_mail/Create';
 import SentMailIndex from './views/user_panel/dashboard/sent_mail/Index';
+import SentMailShow from './views/user_panel/dashboard/sent_mail/Show';
 import SpamIndex from './views/user_panel/dashboard/spam/Index';
 import StarredIndex from './views/user_panel/dashboard/starred/Index';
 import TrashIndex from './views/user_panel/dashboard/trash/Index';
@@ -51,6 +52,7 @@ class AppRoutes extends Component {
                                 <Route path="/user-panel/dashboard/my-account" element={<MyAccountIndex />} />
                                 <Route path="/user-panel/dashboard/sent-mail-create" element={<SentMailCreate />} />
                                 <Route path="/user-panel/dashboard/sent-mail" element={<SentMailIndex />} />
+                                <Route path="/user-panel/dashboard/sent-mails/:mail_id/show" element={<SentMailShow />} />
                                 <Route path="/user-panel/dashboard/spam" element={<SpamIndex />} />
                                 <Route path="/user-panel/dashboard/starred" element={<StarredIndex />} />
                                 <Route path="/user-panel/dashboard/trash" element={<TrashIndex />} />

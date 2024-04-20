@@ -285,7 +285,6 @@ const sent = async (req, res) => {
             const recipient_user = await UserModel.findById(recipient_id);
 
             if (recipient_user) {
-                console.log(recipient_user);
                 let customized_body = body
                     .replace("{full_name}", recipient_user.name ?? "")
                     .replace("{date_of_birth}", recipient_user.date_of_birth ?? "")

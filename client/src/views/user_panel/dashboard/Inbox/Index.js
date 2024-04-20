@@ -22,12 +22,32 @@ export class Index extends Component {
 
         Helpers.updateHeadComponentDidMount(title, meta_description);
 
+        this.fetchReceivedMailData();
+    }
+
+    componentWillUnmount() {
+        Helpers.updateHeadComponentWillUnmount();
+    }
+
+    fetchReceivedMailData() {
         AxiosAPI.get(`/api/user-panel/dashboard/received-mails/index`)
+        .then(response => {
+            this.setState({
+                received_mails: response.data.result.mails,
+                pagination: response.data.result.pagination,
+            });
+        })
+        .catch(error => {
+            this.setState({
+                error: error,
+            });
+        });
+    }
+
+    handleStarred(mail_id) {
+        AxiosAPI.post(`/api/user-panel/dashboard/received-mails/${mail_id}/mark-as-starred`)
             .then(response => {
-                this.setState({
-                    received_mails: response.data.result.mails,
-                    pagination: response.data.result.pagination,
-                });
+                this.fetchReceivedMailData();
             })
             .catch(error => {
                 this.setState({
@@ -36,8 +56,52 @@ export class Index extends Component {
             });
     }
 
-    componentWillUnmount() {
-        Helpers.updateHeadComponentWillUnmount();
+    handleUnStarred(mail_id) {
+        AxiosAPI.post(`/api/user-panel/dashboard/received-mails/${mail_id}/unmark-as-starred`)
+            .then(response => {
+                this.fetchReceivedMailData();
+            })
+            .catch(error => {
+                this.setState({
+                    error: error,
+                });
+            });
+    }
+
+    handleMoveToSpam(mail_id) {
+        AxiosAPI.post(`/api/user-panel/dashboard/received-mails/${mail_id}/move-to-spam`)
+            .then(response => {
+                this.fetchReceivedMailData();
+            })
+            .catch(error => {
+                this.setState({
+                    error: error,
+                });
+            });
+    }
+
+    handleMoveToTrash(mail_id) {
+        AxiosAPI.post(`/api/user-panel/dashboard/received-mails/${mail_id}/move-to-trash`)
+            .then(response => {
+                this.fetchReceivedMailData();
+            })
+            .catch(error => {
+                this.setState({
+                    error: error,
+                });
+            });
+    }
+
+    handleMarkAsImportant(mail_id) {
+        AxiosAPI.post(`/api/user-panel/dashboard/received-mails/${mail_id}/mark-as-important`)
+            .then(response => {
+                this.fetchReceivedMailData();
+            })
+            .catch(error => {
+                this.setState({
+                    error: error,
+                });
+            });
     }
 
     render() {
@@ -100,17 +164,17 @@ export class Index extends Component {
                                                             <li key={mail.id} className={mail.read_at ? '' : 'unread'}>
                                                                 <div className="email-sender-info">
                                                                     <div className="checkbox-wrapper-mail">
-                                                                        <div className="form-check">
+                                                                        {/* <div className="form-check">
                                                                             <input type="checkbox" className="form-check-input" id="mail20" />
                                                                             <label className="form-check-label" htmlFor="mail20"></label>
-                                                                        </div>
+                                                                        </div> */}
                                                                     </div>
 
                                                                     {(mail.is_starred) ? 
                                                                         (
-                                                                            <span className="star-toggle mdi mdi-star-outline text-warning"></span>
+                                                                            <span className="star-toggle mdi mdi-star-outline text-warning" onClick={() => this.handleUnStarred(mail.id)}></span>
                                                                         ) : (
-                                                                            <span className="star-toggle mdi mdi-star-outline"></span>
+                                                                            <span className="star-toggle mdi mdi-star-outline" onClick={() => this.handleStarred(mail.id)}></span>
                                                                         )
                                                                     }
                                                                     
@@ -128,16 +192,13 @@ export class Index extends Component {
                                                                 <div className="email-action-icons">
                                                                     <ul className="list-inline">
                                                                         <li className="list-inline-item">
-                                                                            <Link to={'/'}><i className="mdi mdi-archive email-action-icons-item"></i></Link>
+                                                                            <button className='btn p-0' onClick={() => this.handleMoveToSpam(mail.id)}><i className="ri-alert-line email-action-icons-item"></i></button>
                                                                         </li>
                                                                         <li className="list-inline-item">
-                                                                            <Link to={'/'}><i className="mdi mdi-delete email-action-icons-item"></i></Link>
+                                                                            <button className='btn p-0' onClick={() => this.handleMoveToTrash(mail.id)}><i className="mdi mdi-delete email-action-icons-item"></i></button>
                                                                         </li>
                                                                         <li className="list-inline-item">
-                                                                            <Link to={'/'}><i className="mdi mdi-email-mark-as-unread email-action-icons-item"></i></Link>
-                                                                        </li>
-                                                                        <li className="list-inline-item">
-                                                                            <Link to={'/'}><i className="mdi mdi-clock email-action-icons-item"></i></Link>
+                                                                            <button className='btn p-0' onClick={() => this.handleMarkAsImportant(mail.id)}><i className="mdi mdi-email-mark-as-unread email-action-icons-item"></i></button>
                                                                         </li>
                                                                     </ul>
                                                                 </div>
