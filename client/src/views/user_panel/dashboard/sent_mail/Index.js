@@ -157,9 +157,14 @@ export class Index extends Component {
                                                                         <li className="list-inline-item">
                                                                             <button className='btn p-0' onClick={() => this.handleDelete(mail._id)}><i className="mdi mdi-delete email-action-icons-item"></i></button>
                                                                         </li>
-                                                                        <li className="list-inline-item">
-                                                                            <button className='btn p-0' onClick={() => this.handleMarkAsImportant(mail._id)}><i className="mdi mdi-email-mark-as-unread email-action-icons-item"></i></button>
-                                                                        </li>
+                                                                        
+                                                                        {(mail.is_important) ? (
+                                                                            <li className="list-inline-item"> </li>
+                                                                        ) : (
+                                                                            <li className="list-inline-item">
+                                                                                <button className='btn p-0' onClick={() => this.handleMarkAsImportant(mail._id)}><i className="mdi mdi-email-mark-as-unread email-action-icons-item"></i></button>
+                                                                            </li>
+                                                                        )}
                                                                     </ul>
                                                                 </div>
                                                             </li>

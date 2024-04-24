@@ -192,14 +192,20 @@ export class Index extends Component {
                                                                 <div className="email-action-icons">
                                                                     <ul className="list-inline">
                                                                         <li className="list-inline-item">
-                                                                            <button className='btn p-0' onClick={() => this.handleMoveToSpam(mail.id)}><i className="ri-alert-line email-action-icons-item"></i></button>
+                                                                            <button className='btn p-0' onClick={() => this.handleMoveToSpam(mail.id)} title='Move To Spam'><i className="ri-alert-line email-action-icons-item"></i></button>
                                                                         </li>
                                                                         <li className="list-inline-item">
-                                                                            <button className='btn p-0' onClick={() => this.handleMoveToTrash(mail.id)}><i className="mdi mdi-delete email-action-icons-item"></i></button>
+                                                                            <button className='btn p-0' onClick={() => this.handleMoveToTrash(mail.id)} title='Move To Trash'><i className="mdi mdi-delete email-action-icons-item"></i></button>
                                                                         </li>
-                                                                        <li className="list-inline-item">
-                                                                            <button className='btn p-0' onClick={() => this.handleMarkAsImportant(mail.id)}><i className="mdi mdi-email-mark-as-unread email-action-icons-item"></i></button>
-                                                                        </li>
+                                                                        
+                                                                        {(mail.is_important) ? (
+                                                                            <li className="list-inline-item"> </li>
+                                                                        ) : (
+                                                                            <li className="list-inline-item">
+                                                                                <button className='btn p-0' onClick={() => this.handleMarkAsImportant(mail.id)} title='Mark As Important'><i className="mdi mdi-email-mark-as-unread email-action-icons-item"></i></button>
+                                                                            </li>
+                                                                        )}
+                                                                        
                                                                     </ul>
                                                                 </div>
                                                             </li>
