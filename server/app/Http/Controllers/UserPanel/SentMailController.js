@@ -158,7 +158,7 @@ const show = async (req, res) => {
                 }
             });
 
-        if (mail_query && (mail_query.sender_id.toString() == req.AuthUser._id.toString()) && (mail_query.is_trash == false) && (mail_query.deleted_at == null)) {
+        if (mail_query && (mail_query.sender_id.toString() == req.AuthUser._id.toString()) && (mail_query.deleted_at == null)) {
             const mail = await SentMailResource.Response(req, mail_query);
 
             return res.status(200).json({
