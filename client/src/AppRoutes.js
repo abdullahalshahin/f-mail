@@ -9,6 +9,7 @@ import ForgetPassword from './views/user_panel/auth/ForgetPassword';
 import DraftIndex from './views/user_panel/dashboard/Draft/Index';
 import ImportantIndex from './views/user_panel/dashboard/important/Index';
 import MyAccountIndex from './views/user_panel/dashboard/my_account/Index';
+import MyAccountEdit from './views/user_panel/dashboard/my_account/Edit';
 import InboxIndex from './views/user_panel/dashboard/Inbox/Index';
 import InboxShow from './views/user_panel/dashboard/Inbox/Show';
 import SentMailCreate from './views/user_panel/dashboard/sent_mail/Create';
@@ -50,6 +51,7 @@ class AppRoutes extends Component {
                                 <Route path="/user-panel/dashboard/draft" element={<DraftIndex />} />
                                 <Route path="/user-panel/dashboard/important" element={<ImportantIndex />} />
                                 <Route path="/user-panel/dashboard/my-account" element={<MyAccountIndex />} />
+                                <Route path="/user-panel/dashboard/my-account-edit" element={<MyAccountEdit />} />
                                 <Route path="/user-panel/dashboard/sent-mail-create" element={<SentMailCreate />} />
                                 <Route path="/user-panel/dashboard/sent-mail" element={<SentMailIndex />} />
                                 <Route path="/user-panel/dashboard/sent-mails/:mail_id/show" element={<SentMailShow />} />

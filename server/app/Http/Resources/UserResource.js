@@ -16,6 +16,7 @@ const Response = (req = null, data) => {
         date_of_birth: date_of_birth,
         phone_number: data.phone_number || null,
         username: data.username || null,
+        password: data.security || null,
         address: data.address || null,
         profile_image: (data.profile_image) ? `${base_url}/images/users/${data.profile_image}` : `${base_url}/images/avator.png`,
         status: data.status || null,

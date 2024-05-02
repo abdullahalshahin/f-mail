@@ -54,7 +54,7 @@ export class LeftSidebar extends Component {
                         <li className="side-nav-item">
                             <Link to={'/user-panel/dashboard'} className="side-nav-link">
                                 <i className="ri-inbox-line"></i>
-                                <span className="badge badge-danger-lighten float-end">7</span>
+                                <span className="badge badge-danger-lighten float-end"></span>
                                 <span> Inbox </span>
                             </Link>
                         </li>
@@ -69,7 +69,7 @@ export class LeftSidebar extends Component {
                         <li className="side-nav-item">
                             <Link to={'/user-panel/dashboard/draft'} className="side-nav-link">
                                 <i className="ri-article-line"></i>
-                                <span className="badge badge-danger-lighten float-end">10</span>
+                                <span className="badge badge-danger-lighten float-end"></span>
                                 <span> Draft </span>
                             </Link>
                         </li>
@@ -125,7 +125,7 @@ export class LeftSidebar extends Component {
                             </Link>
                         </li> */}
 
-                        <div className="help-box text-dark" style={{backgroundColor: '#ffffff', margin: '10px 5px 10px', padding: '5px'}}>
+                        {/* <div className="help-box text-dark" style={{backgroundColor: '#ffffff', margin: '10px 5px 10px', padding: '5px'}}>
                             <h4><span className="badge rounded-pill p-1 px-2 badge-secondary-lighten">FREE</span></h4>
                             <h6 className="text-uppercase mt-3">Storage</h6>
 
@@ -134,7 +134,7 @@ export class LeftSidebar extends Component {
                             </div>
 
                             <p className="text-muted font-13 mb-0">7.02 GB (46%) of 15 GB used</p>
-                        </div>
+                        </div> */}
                     </ul>
 
                     <div className="clearfix"></div>
