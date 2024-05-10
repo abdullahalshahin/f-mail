@@ -200,8 +200,8 @@ export class Create extends Component {
                                                 </div>
 
                                                 <div className="float-end">
-                                                    <Link to={'/user-panel/dashboard'} className="btn btn-primary button-last"> Go Back </Link>
-                                                    <button type="submit" className="btn btn-success button-last"> Save </button>
+                                                    {/* <Link to={'/user-panel/dashboard'} className="btn btn-primary button-last"> Go Back </Link> */}
+                                                    <button type="submit" className="btn btn-success button-last"> Sent </button>
                                                 </div>
                                             </form>
                                         </div>
